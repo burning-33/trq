@@ -1,0 +1,83 @@
+<!--pages/Order/Order.wxml订单列表-->
+<view id='body'>
+  <!-- 预约报修外皮 -->
+  <view class='yy-waipi' wx:if="{{!list[0]}}">
+    <image class='img1' src='../../images/img1.jpg'></image>
+    <view class="pd-lr-15 ft-14 tx-9 text-ct">
+      目前还没有订单可接
+    </view>
+  </view>
+  <!-- 预约报修内在 -->
+  <view wx:if="{{list[0]}}" class='pd-lr-15 pd-tb-10'>
+    <block wx:for="{{list}}" wx:key="id" wx:for-index="idx">
+      <view class='bd-r-4 mg-b-10'>
+        <view class='list-top'>{{item.order_type}}</view>
+        <view class='bg-f bd-b-r4'>
+          <view class='list4 bd-b'>
+            <view class='flt-l w70'>下单时间：</view>
+            <text class='flt-l w240'> {{item.created_at}} </text>
+            <view class='clear'></view>
+          </view>
+          <view class='list4 bd-b' wx:if="{{repaireType}}">
+            <view class='flt-l w70'>{{repaireType}}类型：</view>
+            <text class='flt-l w240' wx:if="{{repaireType == '抢险'}}">{{item.qx_type==1?'漏气':item.qx_type==2?'管道更换':'排水'}} </text>
+            <text class='flt-l w240' wx:if="{{repaireType == '报修'}}">{{item.bx_type==1?'漏气':item.bx_type==2?'无气':item.bx_type==3?'气表更换':'其它'}} </text>
+            <text class='flt-l w240' wx:if="{{repaireType == '大修'}}">{{item.dx_type==1?'庭院埋地管线整改':item.dx_type==2?'一户一表改造':item.dx_type==3?'设备更换':'管线迁改'}} </text>
+            <view class='clear'></view>
+          </view>
+          <view class='list4 bd-b'  wx:if="{{repaireType == '抢险'}}">
+            <view class='flt-l w70'>工程名称：</view>
+            <text class='flt-l w240'> {{item.project_name}} </text>
+            <view class='clear'></view>
+          </view>
+          <view class='list4 bd-b'  wx:if="{{problem == '整改'}}">
+            <view class='flt-l w70'>{{problem}}描述：</view>
+            <text class='flt-l w240'> {{item.content}} </text>
+            <view class='clear'></view>
+          </view>
+          <view class='list4 bd-b'>
+            <view class='flt-l w70'>客户姓名：</view>
+            <text class='flt-l w240'> {{item.name}} </text>
+            <view class='clear'></view>
+          </view>
+          <view class='list4 bd-b'>
+            <view class='flt-l w70'>客户电话：</view>
+            <text class='flt-l w240'> {{phoneHaveArr[idx]== true?item.mobile:item.fix_tel}}</text>
+            <view class='clear'></view>
+          </view>
+          <view class='list4 bd-b'>
+            <view class='flt-l w70'>客户地址：</view>
+            <text>{{item.address}}</text>
+            <view class='clear'></view>
+          </view>
+          <view class='list4 bd-b' wx:if="{{reform==4}}">
+            <view class='flt-l w70'>勘察员：</view>
+            <text>{{item.username}}</text>
+            <view class='clear'></view>
+          </view>
+          <view wx:if="{{banzhang==2?false:true}}" class='list4'>
+            <view class='flt-l w70'>当前状态：</view>
+            <text class='flt-l w240'> {{item.status==1?'待审核':''}}{{item.status==2?'待接单':''}} </text>
+            <view class='clear'></view>
+          </view>
+
+          <view class='pd-t-10 pd-b-24 bd-b-r4'>
+            <view class='flt-l mg-l-24 anniu2 bg-zt tx-f ft-18 bd-zt' data-id="{{item.id}}"   data-orderid="{{item.order_id}}" bindtap='jiedantap'>接单</view>
+            <view class='flt-r mg-r-24 anniu2 bg-f tx-6 ft-18 bd-95' data-id="{{item.id}}"   data-orderid="{{item.order_id}}" bindtap="fangqitap">忽略</view>
+            <view class='clear'></view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <view wx:if="{{daodi}}" class='daodi'>到底了后面没有订单了</view>
+  </view>
+  <view wx:if="{{showts}}" class='ceng-wai'></view>
+  <view wx:if="{{showts}}" class='ceng-nei'>
+    <view class='ft-18 pd-t-24 mg-b-10'>确认接单</view>
+    <view class='ft-16 tx-9 mg-b-15'>接单成功后，请立即处理问题</view>
+    <view class='queding' bindtap='quedingtap'>确定</view>
+  </view>
+  <view wx:if="{{showtss}}" class='tishis'>
+    <view class='tx-f ft-14'>{{msg}}</view>
+  </view>
+</view>

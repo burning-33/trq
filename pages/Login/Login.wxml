@@ -1,0 +1,28 @@
+<!--pages/Login/Login.wxml-->
+<view id='body'>
+  <!-- 登录 -->
+  <view class='denglu'>
+    <image class='img1' src='../../images/dlda.png'></image>
+    <form bindsubmit="formSubmit">
+      <view class='pd-lr-15'>
+        <view class='listt'>
+          <image class='img' src='../../images/dl1.png'></image>
+          <input name="username" type='number' value='{{names}}' placeholder='请输入手机号' ></input>
+        </view>
+        <view class='listt'>
+          <image class='img' src='../../images/dl2.png'></image>
+          <input name="password" type='password' value='{{psd}}' placeholder='请输入密码' ></input>
+        </view>
+        <view class='pd-t-24'>
+          <button class='anniu ft-18 tx-f bg-zt' formType="submit">登 录</button>
+        </view>
+      </view>
+    </form>
+  </view>
+
+  <!-- 提示框 -->
+  <view wx:if="{{showts}}" class='tishis'>
+    <view class='tx-f ft-14'>{{msg}}</view>
+  </view>
+  
+</view> 

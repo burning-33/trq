@@ -1,0 +1,121 @@
+/* pages/Order/Order.wxss */
+page{background-color: #EFEFF4;}
+.list-top{
+  height: 84rpx;
+  line-height: 84rpx;
+  background-color: #22B592;
+  text-align: center;
+  color: #fff;
+  font-size: 40rpx;
+  border-top-left-radius: 8rpx;
+  border-top-right-radius: 8rpx;
+}
+.list4{
+  font-size: 30rpx;
+  padding: 20rpx 30rpx;
+}
+.list4 text{
+  float: right;
+  width: 480rpx;
+  color: #999;
+}
+.bd-b-r4{
+  border-bottom-left-radius: 8rpx;
+  border-bottom-right-radius: 8rpx;
+}
+.ceng-wai{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  z-index: 99;
+  background-color: hsla(0, 0%, 0%, .7);
+}
+.ceng-nei{
+  position: fixed;
+  width: 560rpx;
+  height: 290rpx;
+  left: 95rpx;
+  top: 300rpx;
+  z-index: 100;
+  background-color: #fff;
+  text-align: center;
+  border-radius: 8rpx;
+}
+.queding{
+  border-top: 2rpx solid #ddd;
+  color: #B52222;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+.yy-waipi{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}
+.yy-waipi .img1{
+  width: 162rpx;
+  height: 146rpx;
+  padding-top: 100rpx;
+  margin-left: 294rpx;
+  margin-bottom: 76rpx;
+}
+.mg-r-24{margin-right: 48rpx;}
+#body .w240{width: 480rpx;}
+
+.daodi{
+  font-size: 32rpx;
+  text-align: center;
+  padding: 40rpx 0;
+  color: #666;
+}
+/* 放弃弹框 */
+.markBox{
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(88, 88, 88, 0.8);
+}
+.markBox .floatR{
+  position: absolute;
+  right: 10rpx;
+  top: 10rpx;
+}
+.markBox .h1{
+      text-align: center;
+      line-height: 60rpx;
+}
+
+.markBox textarea{
+         width: 90%;
+         margin: 20rpx auto;
+          box-sizing: border-box;
+          padding: 20rpx;
+          border: 1rpx solid #BFBFBF 
+}
+.mark{
+      width: 80%;
+      height: 50%;
+      background: #ffffff;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      border-radius: 10rpx;
+}
+.markBox .fangqiSure{
+      width: 90%;
+      margin: 0 auto;
+      color: #ffffff;
+      background: #22B592;
+}
+.fangqiSure:active{
+      background: #1C8B6E;
+}
+.dis{
+      display: none
+}

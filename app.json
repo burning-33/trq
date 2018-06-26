@@ -1,0 +1,51 @@
+{
+  "pages": [    
+    "pages/Login/Login",
+    "pages/index/index",    
+    "pages/Order/Order",
+    "pages/OrderList/OrderList",
+    "pages/PersonalCenter/PersonalCenter",
+    "pages/TreatmentProcess/TreatmentProcess",
+    "pages/OrderDetails/OrderDetails",
+    "pages/AddMaterial/AddMaterial"
+    
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#3C3D41",
+    "navigationBarTitleText": "信诚油气维修",
+    "navigationBarTextStyle": "#fff"
+    },
+  "tabBar": {
+    "color": "#9A9A9A",
+    "selectedColor":"#60C4AA",
+    "backgroundColor": "#fff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/bt1.png",
+        "selectedIconPath": "images/bt1-on.png"
+      },
+      {
+        "pagePath": "pages/Order/Order",
+        "text": "订单",
+        "iconPath": "images/bt2.png",
+        "selectedIconPath": "images/bt2-on.png"
+      },
+      {
+        "pagePath": "pages/PersonalCenter/PersonalCenter",
+        "text": "我的",
+        "iconPath": "images/bt3.png",
+        "selectedIconPath": "images/bt3-on.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 30000,
+    "connectSocket": 3000,
+    "uploadFile": 3000,
+    "downloadFile": 3000
+  },
+  "debug": true
+}

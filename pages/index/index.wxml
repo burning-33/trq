@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view id='body'>
+  <!-- 提示框 -->
+  <view wx:if="{{showts}}" class='tishis'>
+    <view class='tx-f ft-14'>{{msg}}</view>
+  </view>
+</view> 
+

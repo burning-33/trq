@@ -1,0 +1,126 @@
+<!--pages/TreatmentProcess/TreatmentProcess.wxml-->
+<!-- 到JS看看0，1，2变化 -->
+<view id='body'>
+  <view class='pd-t-33 pd-b-24 pd-lr-36 bg-f bd-b'>
+    <view class='quan {{huanjie==0?"quan-on":""}}' data-hi="0" bindtap="huanjie">{{reform==4?"整改":"开工"}}前</view>
+    <image class="quan-img" src='../../images/{{huanjie==0?"xz":huanjie==1?"xz-on":"xz"}}.png'></image>
+    <view class='quan {{huanjie==1?"quan-on":""}}' data-hi="1" bindtap="huanjie">{{reform==4?"整改":"完工"}}后</view>
+    <image class="quan-img" src='../../images/{{huanjie==2?"xz-on":"xz"}}.png'></image>
+    <view class='quan {{huanjie==2?"quan-on":""}}' data-hi="2" bindtap="huanjie">{{reform==4?"压力测试":"费用明细"}}</view>
+    <view class='clear'></view>
+  </view>
+  <!--非整改员  -->
+  <view wx:if="{{reform!=4}}">
+    <view wx:if="{{huanjie==2?false:true}}" class='bg-f'>
+      <view class='pd-t-10 pd-lr-10'>
+        <block wx:for="{{imglist}}" wx:key="id" wx:for-index="ind">
+          <image id="{{ind}}-img" class='tj-img' src='{{qzurl+item}}' bindtap='chooseImageTap'></image>
+        </block>
+        <image wx:if="{{imglist.length>9?false:true}}" class='tj-img' src='../../images/tj.png' bindtap='chooseImageTap'></image>
+      </view>
+      <view class='clear'></view>
+    </view>
+    <view wx:if="{{huanjie==2?false:true}}" class='tx-9 ft-14 pd-lr-15 pd-b-10 mg-b-10 bg-f'>(最多上传10张)</view>
+    <view wx:if="{{huanjie==2?false:true}}" class='pd-lr-15 pd-tb-10 bg-f'>
+      <textarea  class='w-100 ft-14 tx-8 h80 {{huanjie==2?"biande":""}}' placeholder-class='{{huanjie==2?"biande":""}}' placeholder='{{huanjie==0?"(可简单描述开工前现场情况)":huanjie==1?"(可简单描述开工后现场情况)":""}}' bindinput='textinput' value='{{text}}'></textarea>
+    </view>
+  </view>
+<!--整改员  -->
+<view wx:else>
+    <view  class='bg-f'>
+      <view class='pd-t-10 pd-lr-10'>
+        <block wx:for="{{imglist}}" wx:key="id" wx:for-index="ind">
+          <image id="{{ind}}-img" class='tj-img' src='{{qzurl+item}}' bindtap='chooseImageTap'></image>
+        </block>
+        <image wx:if="{{imglist.length>9?false:true}}" class='tj-img' src='../../images/tj.png' bindtap='chooseImageTap'></image>
+      </view>
+      <view class='clear'></view>
+    </view>
+    <view  class='tx-9 ft-14 pd-lr-15 pd-b-10 mg-b-10 bg-f'>(最多上传10张)</view>
+    <view class='pd-lr-15 pd-tb-10 bg-f'>
+      <textarea  class='w-100 ft-14 tx-8 h80 {{huanjie==2?"biande":""}}' placeholder='{{huanjie==0?"(可简单描述整改前现场情况)":huanjie==1?"(可简单描述整改后现场情况)":"(可简单描述压力测试现场情况)"}}' bindinput='textinput' value='{{text}}'></textarea>
+    </view> 
+  </view>
+  <!-- 费用明细 -->
+  <view wx:if="{{huanjie!=2?false:true && reform!=4}}">
+    <!-- 收费方式 -->
+    <view class='mg-t-5 pd-lr-15 pd-tb-10 ft-15 bg-f'>收费方式</view>
+    <view class='bd-t pd-t-15 pd-b-5 bg-f'>
+      <radio-group style="text-align: center;" bindchange="radioChange">
+        <label class="checkbox">
+          <radio style='margin-right:15px;font-size:18px' value='2' checked='{{chargename}}'>自主收费</radio>
+          <radio value='1' style='font-size:18px' checked='{{chargename1}}'>甲方签证</radio>
+        </label>
+      </radio-group>
+      <view class='clear'></view>
+    </view>
+    <!-- 服务费用 -->
+    <view class='mg-t-5 pd-lr-15 pd-tb-10 ft-15 bg-f'>
+      <text wx:if="{{feiyong==0?false:true}}" class='flt-r tx-hong'>¥{{feiyong}}</text> 服务费用
+    </view>
+    <view class='bd-t pd-t-15 pd-b-5 bg-f'>
+      <checkbox-group bindchange="checkboxChange" style="text-align: center;">
+        <label class="checkbox" style='font-size:18px'>
+          <checkbox value="{{item.price}},{{ind}}" checked='{{box}}' />服务费
+        </label>
+      </checkbox-group>
+      <view class='clear'></view>
+    </view>
+
+    <view class='mg-t-5 pd-lr-15 pd-tb-10 ft-15 bg-f bd-b'>
+      <text wx:if="{{cllist.length==0?false:true}}" class='flt-r tx-hong'>¥{{mingxi}}</text> 费用明细
+    </view>
+    <view class='min-h140 bg-f'>
+      <!-- 添加的 -->
+      <view wx:if="{{cllist.length==0?true:false}}" class='pd-t-15'>
+        <navigator class='dis-bk w100 h26 lh26 text-ct ft-12 bd-rs-4 tx-zt bd-zt mg-c' url="../AddMaterial/AddMaterial?orderType={{orderType}}&rid={{rid}}">添加材料明细</navigator>
+      </view>
+      <!-- 数据来了 -->
+      <view wx:if="{{cllist.length!=0?true:false}}">
+        <view>
+          <view class='flt-l ft-14 pd-tb-10 text-ct bd-r bd-b w150'>名称</view>
+          <view class='flt-l ft-14 pd-tb-10 text-ct bd-r bd-b w75'>单价</view>
+          <view class='flt-l ft-14 pd-tb-10 text-ct bd-r bd-b w75'>数量</view>
+          <view class='flt-l ft-14 pd-tb-10 text-ct bd-b w75'>总价</view>
+          <view class='clear'></view>
+        </view>
+        <block wx:for="{{cllist}}" wx:key="id">
+          <view class='flt-l ft-12 pd-tb-10 bd-r bd-b w150' style='height:17px'>
+            <view class='pd-lr-10 text-ct ellipsis'>
+              {{item.material_name}}{{item.specification}}
+            </view>
+          </view>
+          <view class='flt-l ft-12 pd-tb-10 bd-r bd-b w75'>
+            <view class='pd-lr-10 text-ct tx-danger ellipsis'>¥{{item.price}}</view>
+          </view>
+          <view class='flt-l ft-12 pd-tb-10 bd-r bd-b w75'>
+            <view class='pd-lr-10 text-ct ellipsis'>{{item.num}}</view>
+          </view>
+          <view class='flt-l ft-12 pd-tb-10 bd-b w75'>
+            <view class='pd-lr-10 text-ct tx-danger ellipsis'>¥{{item.total_price}}</view>
+          </view>
+          <view class='clear'></view>
+        </block>
+        <view class='clear mg-b-15'></view>
+        <view class='text-r ft-14 pd-tb-10 pd-lr-15'>
+          需支付：
+          <text class='tx-danger'>¥{{sjia}}</text>
+          <button class='flt-l w60 h20 lh20 bd-all bd-rs-4 ft-12 text-ct' bindtap='change'>修改</button>
+        </view>
+      </view>
+    </view>
+    <!-- 明细 end-->
+
+  </view>
+
+  <view class='pd-lr-15 mg-t-110 mg-b-24 {{huanjie==2?"biandegao":""}}'>
+    <view class='anniu tx-f bg-zt ft-18' bindtap='tijiaotap'>{{huanjie==2?'确 认':'确认上传'}}</view>
+  </view>
+
+  <!-- 提示框 -->
+  <view wx:if="{{showts}}" class='tishis'>
+    <image class='gg-img' src='../../images/gg.png'></image>
+    <view class='tx-f ft-14'>提交成功</view>
+  </view>
+
+</view>

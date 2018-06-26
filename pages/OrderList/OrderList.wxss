@@ -1,0 +1,50 @@
+/* pages/OrderList/OrderList.wxss */
+page{background-color: #EFEFF4;}
+.dw-top{
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 88rpx;
+  line-height: 88rpx;
+  background-color: #F9F9F9;
+}
+.dw-top .view{
+  float: left;
+  width: 50%;
+  text-align: center;
+  font-size: 28rpx;
+}
+.dw-top .view-on{
+  height: 84rpx;
+  color: #22B592;
+  border-bottom: 4rpx solid #22B592;
+}
+.list3{
+  padding:30rpx;
+  margin-bottom: 20rpx;
+  background-color: #fff;
+  font-size: 28rpx;
+}
+.list3 text{
+  float: right;
+  width: 540rpx;
+}
+.list3 .text{
+  width: 410rpx;
+  line-height: 42rpx;
+}
+.h44{height: 88rpx;}
+.w70{width: 140rpx;}
+.daodi{
+  font-size: 32rpx;
+  text-align: center;
+  padding: 40rpx 0;
+  color: #666;
+}
+#body .w190{width: 380rpx;}
+.dis{
+      display: none
+}
+.yy-waipi{
+  margin-top: 300rpx; 
+}

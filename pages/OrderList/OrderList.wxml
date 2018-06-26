@@ -1,0 +1,84 @@
+<!--pages/OrderList/OrderList.wxml-->
+<view id='body'>
+  <!-- 上 -->
+  <view class='dw-top'>
+    <view id='0-page' class='view {{comment_status==0?"view-on":""}}' bindtap='toptap'>未完成</view>
+    <view id='1-lage' class='view {{comment_status==1?"view-on":""}}' bindtap='toptap'>已完成</view>
+  </view>
+  <view class='h44'></view>
+   <!-- 没有订单显示 -->
+  <view class='yy-waipi' wx:if="{{!list[0] && comment_status==0}}">
+    <view class="pd-lr-15 ft-14 tx-9 text-ct" >
+      目前还没有未完成的订单
+    </view>
+  </view>
+  <view class='yy-waipi' wx:if="{{!list2[0] && comment_status==1}}">
+    <view class="pd-lr-15 ft-14 tx-9 text-ct" >
+      目前还没有已完成的订单
+    </view>
+  </view>
+  
+  <!-- 列表 -->
+  <block wx:for="{{comment_status==0?list:list2}}" wx:key="id" wx:for-index="idx">
+    <view class='list3'>
+      <view class='mg-b-5 tx-hong'>
+        <navigator class='flt-r xanniu {{comment_status==0?"xanniu-on":"tx-3"}}' url='../OrderDetails/OrderDetails?ddid={{item.id}}&orderId={{item.order_id}}'>
+          {{comment_status==0?'立即处理':'点击查看'}}
+        </navigator>
+        <view class='flt-l w70 text-r'>下单时间：</view>
+        <text class='ft-12 text'>{{item.created_at}}</text>
+        <view class='clear'></view>
+      </view>
+      <view class='mg-b-5'>
+        <view class='flt-l w70 text-r'>订单号：</view>
+        <text class='tx-9'>{{item.order_id}}</text>
+        <view class='clear'></view>
+      </view>
+      <view class='mg-b-5'>
+        <picker bindchange="bindPickerChange" mode="selector" value="{{index}}" range="{{xiashudata}}" data-id="{{item.id}}">
+          <!-- <view wx:if="{{banzhang==2&&item.source==2?true:false}}" class='flt-r xanniu bg-zt tx-f ft-12 bd-zt' >派单</view> -->
+        </picker>
+        <view class='flt-l w70 text-r'>订单来源：</view>
+        <text class='tx-9 flt-l mg-l-5 w190'>{{item.source==1?"自己接单":""}}{{item.source==2?"管理员指定":""}}{{item.source==3?"班长派单":""}}</text>
+        <view class='clear'></view>
+      </view>
+      <view wx:if="{{orderType == '3'}}">
+        <view class='mg-b-5'>
+          <view class='flt-l w70 text-r'>抢险类型：</view>
+          <text class='tx-9'>{{item.qx_type==1?'漏气':item.qx_type==2?'管道更换':'排水'}} </text>
+          <view class='clear'></view>
+        </view>
+        <view class='mg-b-5'>
+          <view class='flt-l w70 text-r'>项目名称：</view>
+          <text class='tx-9'>{{item.project_name}}</text>
+          <view class='clear'></view>
+        </view>
+        <view class='mg-b-5'>
+          <view class='flt-l w70 text-r'>立项号：</view>
+          <text class='tx-9'>{{item.project_number}}</text>
+          <view class='clear'></view>
+        </view>
+        
+      </view>
+      <view class='mg-b-5'>
+        <view class='flt-l w70 text-r'>联系人：</view>
+        <text class='tx-9'>{{item.name}}</text>
+        <view class='clear'></view>
+      </view>
+      <view class='mg-b-5'>
+        <view class='flt-l w70 text-r'>联系电话：</view>
+        <!-- <text class='tx-9  {{phoneHaveArr[idx] == true?"":"dis"}}'>{{item.mobile}}</text>
+        <text class='tx-9  {{phoneHaveArr[idx] == false?"":"dis"}}'>{{item.fix_tel}}</text> -->
+        <text class='tx-9 mobile ' wx:if="{{item.mobile}}">{{item.mobile}}</text>
+        <text class='tx-9 fix_tel' wx:else>{{item.fix_tel}}</text>
+        <view class='clear'></view>
+      </view>
+      <view>
+        <view class='flt-l w70 text-r'>地址：</view>
+        <text class='tx-9 ellipsis'>{{item.address}}</text>
+        <view class='clear'></view>
+      </view>
+    </view>
+  </block>
+  <view wx:if="{{daodi[comment_status]}}" class='daodi'>到底了后面没有订单了</view>
+</view>

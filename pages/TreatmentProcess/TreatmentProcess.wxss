@@ -1,0 +1,71 @@
+/* pages/TreatmentProcess/TreatmentProcess.wxss */
+page{background-color: #EFEFF4;}
+.pd-t-33{padding-top: 66rpx;}
+.pd-lr-36{
+  padding-left: 72rpx;
+  padding-right: 72rpx;
+}
+.quan{
+  float: left;
+  width: 122rpx;
+  height: 122rpx;
+  line-height: 122rpx;
+  font-size: 28rpx;
+  border-radius: 100%;
+  border:2rpx solid #ABABAB;
+  text-align: center;
+}
+.quan-on{
+  color: #fff;
+  background-color: #22B592;
+  border-color: #22B592;
+}
+.quan-img{
+  float: left;
+  width: 28rpx;
+  height: 36rpx;
+  margin: 0 42rpx;
+  margin-top: 45rpx;
+}
+.tj-img{
+  float: left;
+  width: 120rpx;
+  height: 120rpx;
+  margin-bottom: 20rpx;
+  margin-right: 22rpx;
+}
+.tj-img:last-child{margin-right: 0;}
+.tx-8{color: #888888;}
+.h80{height: 160rpx;}
+.mg-t-110{margin-top: 220rpx;}
+#body .biande{
+  height: 260rpx;
+  font-size: 30rpx;
+  color: #353535;
+}
+.biandegao{
+  margin-top: 68rpx;
+}
+.tishis{
+  left: 225rpx;
+  width: 300rpx;
+  font-size: 32rpx;
+  top: calc((100vh - 300rpx)/2);
+  top: -webkit-calc((100vh - 300rpx)/2);
+  height: 260rpx;
+  line-height: 60rpx;
+}
+.mg-l-17{margin-left: 34rpx;} 
+.w100{width: 200rpx;} 
+.h26{height: 52rpx;} 
+.lh26{line-height: 52rpx;}
+.min-h140{min-height: 280rpx;}
+#body .fwaction{
+  border-color: #22B592;
+  color:#22B592;
+}
+.w150{width: 300rpx;}
+.w75{width: 148rpx;}
+.w60{width: 120rpx;}
+.h20{height: 40rpx;}
+.lh20{line-height: 40rpx;}

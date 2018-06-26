@@ -1,0 +1,82 @@
+@import "common.wxss";
+#body .bg-zt{background-color: #22B592;}
+#body .tx-zt{color: #22B592;}
+#body .tx-hong{color: #B42020;}
+.mg-t-45{margin-top: 90rpx;}
+#body .bd-zt{border:2rpx solid #22B592;}
+#body .bd-95{border: 2rpx solid #959595;}
+/* 输入列表 */
+.list{
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-top: 20rpx;
+  background-color: #fff;
+  padding: 0 30rpx;
+}
+.list .zuo{
+  float: left;
+  width: 170rpx;
+  text-align: right;
+  font-size: 34rpx;
+}
+.list .text{
+  padding: 0 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 34rpx;
+  color: #666;
+}
+.list .you{
+  float: right;
+  width: 24rpx;
+  height: 36rpx;
+  margin-top: 26rpx;
+}
+.xanniu{
+  float: right;
+  border:2rpx solid #ddd;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  padding: 5rpx 10rpx 6rpx 10rpx;
+  width: 112rpx;
+  text-align: center;
+}
+.xanniu-on{
+  background-color:#22B592;
+  color: #fff;
+  border-color: #22B592;
+}
+.tishis{
+  position: fixed;
+  left: 255rpx;
+  top: calc((100vh - 240rpx)/2);
+  top: -webkit-calc((100vh - 240rpx)/2);
+  width: 240rpx;
+  height: 240rpx;
+  border-radius: 8rpx;
+  background-color: hsla(0, 0%, 0%, .6);
+  z-index: 100;
+  text-align: center;
+}
+.gg-img{
+  width: 96rpx;
+  height: 96rpx;
+  margin-bottom: 10rpx;
+  padding-top: 40rpx;
+}
+.anniu2{
+  height: 60rpx;
+  line-height: 60rpx;
+  width: 240rpx;
+  text-align: center;
+  border-radius: 8rpx;
+}
+.tishis{
+  left: 175rpx;
+  width: 400rpx;
+  font-size: 32rpx;
+  top: calc((100vh - 80rpx)/2);
+  top: -webkit-calc((100vh - 80rpx)/2);
+  height: 80rpx;
+  line-height: 80rpx;
+}

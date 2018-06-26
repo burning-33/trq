@@ -1,0 +1,226 @@
+<!--pages/OrderDetails/OrderDetails.wxml-->
+<view id='body'>
+  <!-- 订单详情和操作记录切换（整改员导航） -->
+  <view class='dw-top' wx:if="{{orderType==2 && reform==1 || reform==4}}">
+    <view id='1-page' class='reform {{comment_status==1?"view-on":""}}' bindtap='toptap'>订单说明</view>
+    <view id='0-lage' wx:if="{{orderType==2 && reform==1 || reform==4}}" class='reform {{comment_status==0?"view-on":""}}' bindtap='toptap'>勘察记录</view>
+    <view id='2-lage' class='reform {{comment_status==2?"view-on":""}}' bindtap='toptap'>整改记录</view>
+  </view>
+  <!--普通导航  -->
+   <view class='dw-top' wx:else> 
+    <view id='1-page' class='view {{comment_status==1?"view-on":""}}' bindtap='toptap'>订单说明</view>
+    <view id='0-lage' class='view {{comment_status==0?"view-on":""}}' bindtap='toptap'>{{orderType==5?'施工进度':'操作记录'}}</view>
+  </view>
+  <view class='h44'></view>
+  <!-- 只是展示完状态详情只有一个订单的详情 -->
+  <view wx:if="{{comment_status == 1}}">
+    <view class="list-body">
+      <view class='bg-f'>
+        <view class='list'>
+          <view class='zuo'>订单编号：</view>
+          <text class='text'>{{list.order_id}}</text>
+        </view>
+        <view class='list'>
+          <view class='zuo'>下单时间：</view>
+          <text class='text'>{{list.created_at}}</text>
+        </view>
+        <view wx:if="{{repaireType == '抢险'}}">
+         <view class='list'>
+            <view class='zuo'>立项号：</view>
+            <text class='text'>{{list.project_number}}</text>
+          </view>
+          <view class='list'>
+            <view class='zuo'>项目名称：</view>
+            <text class='text'>{{list.project_name}}</text>
+          </view>
+          <view class='list'>
+            <view class='zuo'>土建：</view>
+            <text class='text'>{{list.is_earth==1?'是':'否'}}</text>
+          </view>
+        </view>
+
+        <view class='list list2'>
+          <view class='zuo'>订单来源：</view>
+          <text class='text tx-hong'>{{list.source==1?"自己接单":""}}{{list.source==2?"管理员指定":""}}{{list.source==3?"班长派单":""}}</text>
+          <view class='clear'> </view>
+        </view>
+        <view class='list list2'>
+          <view class='zuo' wx:if="{{repaireType}}">{{repaireType}}类型：</view>
+          <text class='text tx-hong' wx:if="{{repaireType == '抢险'}}">{{list.qx_type==1?'漏气':list.qx_type==2?'管道更换':'排水'}}</text>
+          <text class='text tx-hong' wx:if="{{repaireType == '报修'}}">{{list.bx_type==1?'漏气':list.bx_type==2?'无气':list.bx_type==3?'气表更换':'其它'}}</text>
+          <text class='text tx-hong' wx:if="{{repaireType == '大修'}}">{{list.dx_type==1?'庭院埋地管线整改':list.dx_type==2?'一户一表改造':list.dx_type==3?'设备更换':'管线迁改'}}</text>
+          <view class='clear'> </view>
+        </view>
+        <view class='list list2' wx:if="{{problem}}">
+          <view class='zuo'>{{problem}}描述：</view>
+          <text class='text'>{{list.content}}</text>
+          <view class='clear'> </view>
+        </view>
+        <view class='list'>
+          <view class='zuo'>客户姓名：</view>
+          <text class='text'>{{list.name}}</text>
+        </view>
+        <view class='list'>
+          <view class='dhr' bindtap="callmeTap">
+            <image class='dh-img' src='../../images/dh.png'></image>
+            一键拨号
+          </view>
+          <view class='zuo'>客户电话：</view>
+          <text class='text'>{{phoneHave?list.mobile:list.fix_tel}}</text>
+        </view>
+        <view class='list'>
+          <view class='zuo'>接单时间：</view>
+          <text class='text'>{{list.order_date}}</text>
+        </view>
+        <view class='list list2'>
+          <view class='zuo'>客户地址：</view>
+          <text class='text'>{{list.address}}</text>
+          <view class='clear'> </view>
+        </view>
+        <view class='list' wx:if="{{orderType==2 && reform==1 || reform==4}}">
+            <view class='zuo'>勘察员：</view>
+            <text class='text'>{{list.username}}</text>
+            <view class='clear'></view>
+          </view>
+          <view class='list'>
+            <view class='zuo'>当前状态：</view>
+            <text class='text'> {{list.status==3?'已接单':''}}{{list.status==4?'已完工':''}} </text>
+            <view class='clear'></view>
+          </view>
+      </view>
+      <view class='pd-t-37'>
+        <!-- <view class='fangqi' wx:if="{{charge}}">已收费</view> -->
+        <view>
+          <button class='fangqi' wx:if="{{list.before_start_ext_status==0}}" bindtap='goProcess'>立即开工</button>
+          <button class='fangqi' wx:elif="{{list.order_list_status==1&&list.status==3}}" bindtap='shouqiantap'>确认完工</button>
+          <button class='fangqi' wx:elif="{{list.pressure_start_ext_status==1&&list.status==3}}" bindtap='shouqiantap'>确认完工</button>
+          <button class='fangqi' wx:elif="{{list.status==3}}" bindtap='goProcess'>继续操作</button>
+          <button wx:if="{{list.before_start_ext_status==0}}" class='fangqi' bindtap='esctap'>放弃</button>
+          <button wx:elif="{{list.status==3}}" class='fangqi' bindtap='goProcess'>订单修改</button>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--勘察记录/操作记录  -->
+  <view wx:elif="{{comment_status==0}}">
+    <view class='jilu'>
+      <view class='bg-f'>
+        <view class='list'>
+          <view class='zuo'>开工前：</view>
+          <text class='text'>{{before_record.created_at}}</text>
+          <view style='padding:0 0 0 50rpx;'>
+            <image wx:for="{{before_record.images}}" wx:key="id" src='{{qzurl+item}}' data-src='{{qzurl+item}}' style='margin-right:25rpx;' bindtap='yulan'></image>
+          </view>
+          <view class='content'> 
+            <text class='text'>{{before_record.content}}</text>
+          </view>
+        </view>
+        <view class='list'>
+          <view class='zuo'>完工后：</view>
+          <text class='text'>{{after_record.created_at}}</text>
+          <view style='padding:0 0 0 50rpx;'>
+            <image wx:for="{{after_record.images}}" wx:key="id" src='{{qzurl+item}}' data-src='{{qzurl+item}}' style='margin-right:25rpx;' bindtap='yulan'></image>
+          </view>
+          <view class='content'>
+            <text class='text'>{{after_record.content}}</text>
+          </view>
+        </view>
+        <view style='height:90rpx;line-height:80rpx;border-bottom:1rpx solid #ddd'>
+          <text style='margin-left:50rpx;font-size:34rpx'>收费方式：</text>
+          <text class='text' style='font-size:32rpx'>{{chargename}}</text>
+        </view> 
+        <view style='height:90rpx;line-height:80rpx;border-bottom:1rpx solid #ddd'>
+          <text style='margin-left:50rpx;font-size:34rpx'>费用明细</text>
+        </view>
+        <view class='min-h140 bg-f'>
+          <!-- 数据来了 -->
+          <view>
+            <view>
+              <view class='flt-l ft-14 pd-tb-10 text-ct bd-r bd-b w150'>名称</view>
+              <view class='flt-l ft-14 pd-tb-10 text-ct bd-r bd-b w75'>单价</view>
+              <view class='flt-l ft-14 pd-tb-10 text-ct bd-r bd-b w75'>数量</view>
+              <view class='flt-l ft-14 pd-tb-10 text-ct bd-b w75'>总价</view>
+              <view class='clear'></view>
+            </view>
+            <block wx:for="{{cllist}}" wx:key="id">
+              <view class='flt-l ft-12 pd-tb-10 bd-r bd-b w150' style='height:17px'>
+                <view class='pd-lr-10 text-ct ellipsis'>
+                  {{item.material_name}}{{item.specification}}
+                </view>
+              </view>
+              <view class='flt-l ft-12 pd-tb-10 bd-r bd-b w75' style='height:17px'>
+                <view class='pd-lr-10 text-ct tx-danger ellipsis'>¥{{item.price}}</view>
+              </view>
+              <view class='flt-l ft-12 pd-tb-10 bd-r bd-b w75' style='height:17px'>
+                <view class='pd-lr-10 text-ct ellipsis' style='height:31rpx'>{{item.num}}</view>
+              </view>
+              <view class='flt-l ft-12 pd-tb-10 bd-b w75' style='height:17px'>
+                <view class='pd-lr-10 text-ct tx-danger ellipsis'>¥{{item.total_price}}</view>
+              </view>
+              <view class='clear'></view>
+            </block>
+            <view class='clear mg-b-15'></view>
+            <view class='text-r ft-14 pd-tb-10 pd-lr-15'>
+              合计：
+              <text class='tx-danger'>¥{{sjia}}</text>
+            </view>
+          </view>
+        </view>
+        <!-- 明细 end-->
+      </view>
+    </view>
+  </view>
+  
+<!--整改记录  -->
+   <view wx:else>
+    <view class='jilu'>
+      <view class='bg-f'>
+        <view class='list'>
+          <view class='zuo'>整改前：</view>
+          <text class='text'>{{before_record.created_at}}</text>
+          <view style='padding:0 0 0 50rpx;'>
+            <image wx:for="{{before_record.images}}" wx:key="id" src='{{qzurl+item}}' data-src='{{qzurl+item}}' style='margin-right:25rpx;' bindtap='yulan'></image>
+          </view>
+          <view class='content'> 
+            <text class='text'>{{before_record.content}}</text>
+          </view>
+        </view>
+        <view class='list'>
+          <view class='zuo'>整改后：</view>
+          <text class='text'>{{after_record.created_at}}</text>
+          <view style='padding:0 0 0 50rpx;'>
+            <image wx:for="{{after_record.images}}" wx:key="id" src='{{qzurl+item}}' data-src='{{qzurl+item}}' style='margin-right:25rpx;' bindtap='yulan'></image>
+          </view>
+          <view class='content'>
+            <text class='text'>{{after_record.content}}</text>
+          </view>
+        </view>
+         <view class='list'>
+          <view class='zuo'>压力测试：</view>
+          <text class='text'>{{pressure_record.created_at}}</text>
+          <view style='padding:0 0 0 50rpx;'>
+            <image wx:for="{{pressure_record.images}}" wx:key="id" src='{{qzurl+item}}' data-src='{{qzurl+item}}' style='margin-right:25rpx;' bindtap='yulan'></image>
+          </view>
+          <view class='content'>
+            <text class='text'>{{pressure_record.content}}</text>
+          </view>
+        </view>
+        <view class='min-h140 bg-f'></view>
+        <!-- 明细 end-->
+      </view>
+    </view>
+  </view> 
+</view>
+<!-- 放弃弹窗 -->
+<view class='markBox' wx-if="{{giveUp}}">
+  <view class='mark'>
+    <view class='h1'>弃单说明</view>
+    <view class='floatR' bindtap='cancel'>
+      <icon type='cancel' color='#999'> </icon>
+    </view>
+    <form bindsubmit="bindFormSubmit">
+      <textarea name="textarea" />
+      <button form-type="submit" class='fangqiSure'> 确认 </button>
+    </form>
+  </view>
+</view>

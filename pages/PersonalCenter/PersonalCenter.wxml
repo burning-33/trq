@@ -1,0 +1,15 @@
+<!--pages/PersonalCenter/PersonalCenter.wxml-->
+<view id='body'>
+  <image class="dw-zhong-img" src='{{wsrc}}'></image>
+  <view class='dw-zhong-view'>{{name}}</view>
+  <image class='bg1-img mg-b-15' src='../../images/bg1.jpg'></image>
+  <view class="bd-t"> 
+    <block wx:for="{{list}}" wx:key="id">
+      <navigator class='list2' url='{{item.url}}' open-type='navigate'>
+        <image class='you' src='../../images/youa.png' mode='aspectFit'></image>
+        <image class='zuo' src='{{item.src}}' mode='aspectFit'></image>
+        <text class='flt-l text'>我的订单({{text}})</text>
+      </navigator> 
+    </block>
+  </view>
+</view>

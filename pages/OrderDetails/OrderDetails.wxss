@@ -1,0 +1,214 @@
+/* pages/OrderDetails/OrderDetails.wxss */
+
+page {
+  background-color: #efeff4;
+}
+
+.min-h140 {
+  min-height: 280rpx;
+}
+
+.w150 {
+  width: 220rpx;
+}
+
+.w75 {
+  width: 175rpx;
+}
+
+.list {
+  border-bottom: 2rpx solid #ddd;
+  margin-top: 0;
+}
+
+.h44 {
+  height: 88rpx;
+}
+
+.dw-top {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 88rpx;
+  line-height: 88rpx;
+  background-color: #f9f9f9;
+}
+
+.dw-top .view {
+  float: left;
+  width: 50%;
+  text-align: center;
+  font-size: 28rpx;
+}
+.dw-top .reform {
+  float: left;
+  width: 33.3%;
+  text-align: center;
+  font-size: 28rpx;
+}
+/*整改导航样式  */
+.dw-top .view-on {
+  height: 84rpx;
+  color: #22b592;
+  border-bottom: 4rpx solid #22b592;
+}
+
+.content {
+  margin-top: -40rpx;
+  margin-left: 30rpx;
+}
+
+.list .zuo {
+  float: left;
+  width: 170rpx;
+  text-align: right;
+  font-size: 30rpx;
+}
+
+.list .text {
+  padding: 0 20rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  font-size: 30rpx;
+  color: #999;
+}
+
+.xanniu {
+  border-color: #bcbcbf;
+  margin-left: 20rpx;
+  margin-bottom: 20rpx;
+}
+
+.list2 {
+  height: auto;
+}
+
+.list2 .text {
+  float: right;
+  width: 500rpx;
+  padding: 28rpx 0;
+  line-height: 1.3em;
+  font-size: 30rpx;
+  padding-bottom: 28rpx;
+  color: #999;
+  max-height: 88rpx;
+  height: auto;
+}
+
+.dhr {
+  float: right;
+  width: 220rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  margin-top: 14rpx;
+  color: #fff;
+  background-color: #22b592;
+  text-align: center;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  position: relative;
+  text-indent: 36rpx;
+}
+
+.dh-img {
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  left: 30rpx;
+  top: 10rpx;
+}
+
+.pd-t-37 {
+  padding: 60rpx 0;
+}
+
+.fangqi {
+  width: 360rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  margin-left: 195rpx;
+  border-radius: 8rpx;
+  font-size: 34rpx;
+  color: #fff;
+  background-color: #22b592;
+  text-align: center;
+  border: 2rpx solid #22b592;
+}
+.fangqi + .fangqi{
+  margin-top: 30rpx;
+}
+.fangqi-hei {
+  border-color: #353535;
+  color: #353535;
+  background-color: transparent;
+}
+
+.tx-hong {
+  color: #c24343;
+}
+
+.jilu .list {
+  height: auto;
+  overflow: hidden;
+}
+
+.jilu .list image {
+  width: 60px;
+  height: 60px;
+}
+
+.dispaly {
+  display: none;
+}
+
+/* 放弃弹框 */
+
+.markBox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(88, 88, 88, 0.8);
+}
+
+.markBox .h1 {
+  text-align: center;
+  line-height: 60rpx;
+}
+
+.markBox .floatR {
+  position: absolute;
+  right: 10rpx;
+  top: 10rpx;
+}
+
+.markBox textarea {
+  width: 90%;
+  margin: 20rpx auto;
+  box-sizing: border-box;
+  padding: 20rpx;
+  border: 1rpx solid #bfbfbf;
+}
+
+.mark {
+  width: 80%;
+  height: 50%;
+  background: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10rpx;
+}
+
+.markBox .fangqiSure {
+  width: 90%;
+  margin: 0 auto;
+  color: #fff;
+  background: #22b592;
+}
+
+.fangqiSure:active {
+  background: #1c8b6e;
+}

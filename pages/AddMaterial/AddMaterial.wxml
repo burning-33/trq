@@ -1,0 +1,116 @@
+<!--pages/AddMaterial/AddMaterial.wxml-->
+<view id='body'>
+  <!-- 左 -->
+  <scroll-view class='flt-l w105 h100vh' scroll-y>
+    <view class='pd-b-50 '>
+      <block wx:for="{{list}}" wx:key="id" wx:for-index="ind">
+        <view data-id="{{item.id}}" data-ind="{{ind}}" class='h44 relative w105  lh20 ft-16 text-ct {{zuoaction==ind?"bg-f":""}}' bindtap='zuotap'><text class='height-auto'>{{item.name}}</text></view>
+      </block>
+    </view>
+  </scroll-view>
+  <!-- 右 -->
+  <scroll-view class='flt-r w270 bg-f h100vh' scroll-y>
+    <view class='pd-b-50'>
+      <block wx:for="{{list2}}" wx:key="id">
+        <view class='h30 lh30 ft-14 bd-b-xx pd-lr-10 ellipsis' data-id="{{item.id}}" data-name="{{item.name}}" bindtap='youtap'>{{item.name}}</view>
+      </block>
+    </view>   
+  </scroll-view>
+
+  <!-- 下面1 -->
+  <view class='ceng-wai2 {{ceng2&&hclist.length!=0?"ceng-on":""}}' bindtap="cengsec2"></view>
+  <view class='fwbt1 {{ceng2&&hclist.length!=0?"ceng-on":""}}'>
+    <view class='pd-lr-15 pd-tb-10 ft-14 bd-b'>已选材料</view>
+    <view class='pd-tb-10 pd-lr-15 ft-12'>
+      <view class='flt-l text-l w150'>名称</view>
+      <view class='flt-l text-ct w60'>单价</view>
+      <view class='flt-l text-ct w105'>数量/尺寸</view>
+      <view class='flt-l text-r w30'>操作</view>
+      <view class='clear'></view>
+    </view>
+    <scroll-view scroll-y class='max-h40vh'>
+      <block wx:for="{{hclist}}" wx:key="id" wx:for-index="ind">
+        <view class='pd-lr-15 ft-12 mg-b-10'>
+          <view class='flt-l pd-tb-5 text-l w150 ellipsis'>{{item.material_name}} {{item.specification}}</view>
+          <view class='flt-l pd-tb-5 text-ct w60 tx-danger'>¥{{item.price}}</view>
+          <view class='flt-l text-ct w105'>
+            <input class='bd-zt bd-rs-4 mg-b-0 mg-l-10 h21 lh21 flt-l w85' data-ind="{{ind}}" type='number' value='{{item.num}}' bindinput='zhinput'></input>    
+          </view>
+          <view class='flt-l text-r w30'>
+            <image class='escimg' data-ind="{{ind}}" src='../../images/cha.png' bindtap='eschclist'></image>
+          </view>
+          <view class='clear'></view>
+        </view>
+      </block>
+    </scroll-view>    
+  </view>
+  <!-- 下面2 -->
+  <view class='fwbottom'>
+    <view class='pd-tb-10 pd-lr-15'>
+      <view class='flt-l lh28 ft-12' bindtap="cengshow2">
+        <image class='xm-img' src='../../images/cld.png'></image>
+        已选择<text class='tx-danger'> {{hclist.length > 0 ? hclist.length : 0}} </text>种材料
+      </view>
+      <button class='anniu ft-14 tx-f bg-zt flt-r w100 h28 lh28' bindtap='huichuantap'>确 认</button>
+      <view class='clear'></view>
+    </view>
+  </view>
+
+  <!-- 弹出层 -->
+  <view class='ceng-wai {{ceng?"ceng-on":""}}' bindtap="cengsec"></view>
+  <scroll-view scroll-y="true" style="height: 450px" class='ceng-nei ceng-nei1 {{ceng?"ceng-on":""}}'>
+    <view class='h44 lh44 text-ct ft-14 bd-b pd-lr-10 text-12'>
+      {{title}}
+      <image class='ceng-img' src='../../images/cha.png' bindtap="cengsec"></image>
+      {{cengmz}}
+    </view>
+    <view class='lh44 ft-12 bd-b  {{cenghide}}'>
+      <checkbox-group bindchange="checkboxChange" style="text-align: center;">
+         <view class='service_selection flex'> 
+          <label  class="{{item.yangshi}}" style="" wx:for="{{chenglist}}" wx:key="id" wx:for-index="ind" >
+            <checkbox value="{{ind}}" hidden='false'/>{{item.specification}}
+          </label>
+         </view> 
+      </checkbox-group>
+    </view>
+    <view class='pd-lr-15 pd-tb-15 ft-12'>
+      <view class='mg-b-10'>
+        <view class='flt-l text-l w85'>规格名</view>
+        <view class='flt-l text-ct w50'>单价</view>
+        <view class='flt-l w30 h5'></view>
+        <view class='flt-l text-ct w55'>数量</view>
+        <view class='flt-l w30 h5'></view>
+        <view class='flt-l text-r w50'>总价</view>
+        <view class='clear'></view>
+      </view>
+      <view class='mg-b-10 lh21' wx:for="{{chenlist}}" wx:key="id" wx:for-index="ind">
+        <view class='flt-l text-l w85 tx-9'>{{item.specification ===""?"漆与其他材料":item.specification}}</view>
+        <view class='flt-l text-ct w50 tx-9'>¥ {{item.price}}</view>
+        <view class='flt-l text-ct w30'>X</view>
+        <view class='flt-l text-ct w55'>
+          <view class='flt-r'></view>
+          <input class='bd-zt bd-rs-4 mg-0 h21 lh21 flt-l w37' data-id="{{ind}}" type='number' value='{{item.num}}' bindinput='sxinput'></input>          
+        </view>
+        <view class='flt-l text-ct w30'>=</view>
+        <view class='flt-l text-r w50'>¥ {{cengzj==0?item.price:item.total_price}}<text class='tx-danger'></text></view>
+        <view class='clear'></view>
+      </view>
+      <view class='lh44 ft-12 bd-b pd-lr-15 pd-tb-15'>
+      <view class='h44 lh44 text-ct ft-14 bd-b pd-lr-10 text-12'>
+        材料供应
+      </view>
+        <radio-group class="radio-group" style="text-align: center;" bindchange="changegy">
+          <label class="radio">
+            <radio value="1" checked="true"/>甲
+            <radio class="mg-l-24" value="2" />乙
+          </label>
+        </radio-group>
+      </view>
+      <view wx:if="{{tjtitle}}" class='text-ct ft-12 tx-danger'>请输入正确数量再确定</view>
+      <view class='pd-t-10'>
+          <button class='anniu ft-16 tx-f bg-zt' bindtap='tijiaotap'>提 交</button>
+        </view>
+    </view>
+  </scroll-view>
+  <!-- 弹出层     end -->
+</view>
